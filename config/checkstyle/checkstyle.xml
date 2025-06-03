@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="error"/>
+
+        <!-- File and formatting rules -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+    <module name="LineLength">
+        <property name="max" value="120"/>
+        <property name="ignorePattern" value="^package.*|^import.*"/>
+    </module>
+
+    <!-- TreeWalker handles most AST-based checks -->
+    <module name="TreeWalker">
+        <!-- Javadoc requirements for public methods and classes -->
+        <module name="JavadocMethod">
+            <property name="accessModifiers" value="public, protected"/>
+            <property name="allowMissingParamTags" value="false"/>
+            <property name="validateThrows" value="true"/>
+        </module>
+        <module name="JavadocType">
+            <property name="scope" value="public"/>
+            <property name="excludeScope" value="package"/>
+        </module>
+
+        <!-- Naming conventions -->
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="ParameterName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="MemberName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+        <!-- Indentation rules -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+            <property name="lineWrappingIndentation" value="8"/>
+        </module>
+
+        <!-- Curly brace placement -->
+        <module name="LeftCurly">
+            <property name="option" value="eol"/>
+        </module>
+        <module name="RightCurly">
+            <property name="option" value="alone"/>
+            <property name="tokens" value="LITERAL_ELSE, METHOD_DEF"/>
+        </module>
+
+        <!-- Whitespace rules -->
+        <module name="RegexpSinglelineJava">
+            <!-- Matches a “{” followed by one or more spaces or tabs, then end‐of‐line -->
+            <property name="format" value="\{\s+$"/>
+            <property name="message" value="No whitespace allowed after '{' at end of line."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="NoWhitespaceAfter"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround">
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="tokens"
+                value="
+                    ASSIGN,
+                    BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN,
+                    COLON,
+                    DIV, DIV_ASSIGN, DO_WHILE,
+                    EQUAL,
+                    GE, GT,
+                    LAMBDA, LAND, LE, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR,
+                    LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE,
+                    LOR, LT,
+                    MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN,
+                    NOT_EQUAL,
+                    PLUS, PLUS_ASSIGN,
+                    QUESTION,
+                    SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN,
+                    LITERAL_ASSERT,
+                    TYPE_EXTENSION_AND
+                "/>
+    </module>
+
+        <!-- Import order: static imports, then java.*, javax.*, third-party, then project's -->
+    <module name="ImportOrder">
+        <!-- Define the order of import groups. -->
+        <!-- '*' can be used as a wildcard for "everything else in this category". -->
+        <property name="groups" value="java, javax, org, com"/>
+
+        <!-- Handle static imports separately and place them. -->
+        <!-- 'bottom' means static imports will appear after any non-static groups defined above. -->
+        <!-- If you want them after a specific group, you'd use other 'option' values or include static patterns in 'groups'. -->
+        <property name="staticGroups" value="*"/> <!-- This groups all static imports together -->
+        <property name="option" value="bottom"/> <!-- Places static imports at the bottom -->
+
+        <!-- Enforce that imports are ordered according to the groups. -->
+        <property name="ordered" value="true"/>
+
+        <!-- Put a blank line between import groups. -->
+        <property name="separated" value="true"/>
+
+        <!-- Optional: Sort static imports alphabetically. -->
+        <property name="sortStaticImportsAlphabetically" value="true"/>
+    </module>
+
+    </module>
+</module>

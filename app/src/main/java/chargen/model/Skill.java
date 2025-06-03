@@ -1,9 +1,6 @@
-package chargen.registry;
+package chargen.model;
 
-/**
- * Enumeration of all standard D&D 5E character skills.
- */
-public enum Skills {
+public enum Skill {
     ACROBATICS,
     ANIMAL_HANDLING,
     ARCANA,

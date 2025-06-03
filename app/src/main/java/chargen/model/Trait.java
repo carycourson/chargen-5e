@@ -1,44 +1,25 @@
 package chargen.model;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Synchronized;
-import lombok.ToString;
-
 import java.util.List;
-import java.util.Objects;
 
-/**
- * A passive trait automatically granted by race or environment,
- * such as Darkvision or Fey Ancestry.
- */
-@Getter
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Builder
-public final class Trait {
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import lombok.Builder;
+import lombok.NonNull;
+import lombok.Singular;
+import lombok.Value;
 
-    @EqualsAndHashCode.Include
+// Assuming Modifier, ModifierTarget, Operation are in the same package or imported
+
+@Value
+@Builder(toBuilder = true)
+@SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Lombok @Value + " +
+        "@Singular ensures an unmodifiable list for 'modifiers'")
+public class Trait {
     @NonNull
-    private final String name;
-
+    String name;
     @NonNull
-    private final String description;
-
-    /** Modifiers this trait confers (e.g., darkvision range, speed bonus). */
+    String description;
     @NonNull
-    private final List<Modifier> modifiers;
-
-    /**
-     * Apply this trait's modifiers to the character.
-     */
-    @Synchronized
-    public void applyTo(@NonNull Character character) {
-        Objects.requireNonNull(character, "character");
-        for (Modifier mod : modifiers) {
-            character.addModifier(mod);
-        }
-    }
+    @Singular
+    List<Modifier> modifiers;
 }

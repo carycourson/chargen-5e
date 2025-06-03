@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FindBugsFilter>
+    <!-- Exclude issues in Lombok-generated classes -->
+    <Match>
+        <Class name="~.*Lombok.*" />
+    </Match>
+
+    <!-- Exclude issues in test classes (suffix Test) -->
+    <Match>
+        <Class name="~.*Test$" />
+    </Match>
+
+    <!-- Exclude unread-field warnings (common false positives in DTOs) -->
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD" />
+    </Match>
+
+    <!-- Exclude naming convention warnings for record types or generated classes -->
+    <Match>
+        <Bug pattern="NM_CLASS_NAMING_CONVENTION" />
+    </Match>
+
+    <!-- Exclude excessive-publication warnings for package-info and config classes -->
+    <Match>
+        <Class name="~.*package-info" />
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+</FindBugsFilter>
